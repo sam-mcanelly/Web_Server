@@ -55,7 +55,7 @@ public class Server implements Runnable {
             out  = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
             out.print("HTTP/1.1 200 OK\r\n");
             out.print("Content-type: text/html\r\n\r\n");
-            if (!output.exists()) {
+            if (!output.exists() || output.isDirectory()) {
                 out.print("404 Not Found \n\n");
                 out.flush();
                 out.close();
