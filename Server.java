@@ -51,10 +51,10 @@ public class Server implements Runnable {
             fullDirectory = System.getProperty("user.dir") + "/web" + file;
         PrintWriter out = null;
         try {
-            File output = new File(fullDirectory);
             out  = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
             out.print("HTTP/1.1 200 OK\r\n");
             out.print("Content-type: text/html\r\n\r\n");
+            File output = new File(fullDirectory);
             if (!output.exists() || output.isDirectory()) {
                 out.print("404 Not Found \n\n");
                 out.flush();
@@ -73,10 +73,9 @@ public class Server implements Runnable {
             
         } catch (Exception e){
             try {
-                out  = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
-                out.print("HTTP/1.1 200 OK\r\n");
-                out.print("Content-type: text/html\r\n\r\n");
                 out.print("500 Internal Service Error \n\n");
+                out.flush();
+                out.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
