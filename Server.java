@@ -72,13 +72,9 @@ public class Server implements Runnable {
             }
             
         } catch (Exception e){
-            try {
-                out.print("500 Internal Service Error \n\n");
-                out.flush();
-                out.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            out.print("500 Internal Service Error \n\n");
+            out.flush();
+            out.close();
         }
         
     }
